@@ -1,9 +1,12 @@
 package com.tenco.blog.board;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.tenco.blog.utils.MyDateUtil;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
 
 // 기본 생성자 - JPA에서 엔티티는 기본 생성자가 필요
 @NoArgsConstructor
@@ -14,6 +17,28 @@ import lombok.NoArgsConstructor;
 // 즉, @Entity 어노테이션이 있어야 JPA가 이 객체를 관리 한다.
 @Entity
 public class Board {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String content;
+    private String username;
+
+    @CreationTimestamp
+    private Timestamp createdAt;
+
+    // 생성자 만들어 주기
+    public Board(String title, String content, String username) {
+        this.title = title;
+        this.content = content;
+        this.username = username;
+    }
+
+    public String getTime() {
+        return MyDateUtil.timstampformat(createdAt);
+    }
 
 
 }

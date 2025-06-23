@@ -13,10 +13,18 @@ public class BoardPersistRepository {
     // @Autowired - DI 처리 (final를 사용 시 사용 불가)
     private final EntityManager em;
 
-    // 게시글 삭제하기 (영속성 컨텍스트를 활용)
+    // 게시글 저장 기능 - 영속성 컨텍스트 활용
     @Transactional
-    public void deleteById(Long id) {
+    public Board save(Board board) {
 
+        // 1. 매개변수로 받은 board 현재 비영속성 상태이다.
+        // 아직 영속성 컨텍스트에 관리가 되지 않은 상태
+        // 데이터베이스와 아직은 연관 없는 순수 java 객체 상태
 
+        // 2. em.persist(board); 이 엔티티를 영속성 컨텍스트에 저장하는 개념
+        em.persist(board);
+        return board;
     }
+
+
 }
