@@ -22,7 +22,12 @@ public class BoardPersistRepository {
         // 데이터베이스와 아직은 연관 없는 순수 java 객체 상태
 
         // 2. em.persist(board); 이 엔티티를 영속성 컨텍스트에 저장하는 개념
+        //                  - 영속성 컨텍스트가 board 객체를 관리하게 된다
         em.persist(board);
+
+        // 3. 트랜잭션 커밋 시점에 insert 쿼리 실행
+
+        // 4. 영속 상태로 board 객체를 반환
         return board;
     }
 
